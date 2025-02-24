@@ -1,0 +1,13 @@
+# Ignorar archivos de configuración de usuario de Visual Studio
+*.user
+*.suo
+*.userosscache
+
+# Ignorar carpetas de compilación
+bin/
+obj/
+.vs/
+
+# Ignorar otros archivos que no quieras rastrear en Git
+*.log
+*.tmp

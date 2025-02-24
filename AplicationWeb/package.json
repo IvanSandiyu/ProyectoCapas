@@ -1,0 +1,20 @@
+{
+  "name": "aplicationweb",
+  "version": "1.0.0",
+  "main": "Loggin.cshtml",
+  "scripts": {
+    "buildcss": "postcss wwwroot/css/app.css -o wwwroot/css/app.min.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "postcss-cli": "^11.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.20.1",
+    "postcss": "^8.5.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+  }
+}
