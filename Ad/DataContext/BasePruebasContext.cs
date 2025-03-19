@@ -29,6 +29,7 @@ public partial class BasePruebasContext : DbContext
     {
         modelBuilder.Entity<Usuario>(entity =>
         {
+            entity.ToTable("Usuarios"); // Nombre correcto de la tabla
             entity.HasKey(e => e.IdUsuario).HasName("PK__Usuarios__EF59F762872F3FD2");
 
             entity.Property(e => e.IdUsuario).HasColumnName("Id_usuario");
@@ -37,6 +38,14 @@ public partial class BasePruebasContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
+        });
+        modelBuilder.Entity<CredencialUsuario>(entity =>
+        {
+            entity.ToTable("CredencialesUsuarios"); // Nombre correcto de la tabla
+            entity.HasKey(e => e.Id_usuario).HasName("PK_CredencialUsuario");  // Definir la clave primaria correctamente
+            entity.Property(e => e.Username).HasColumnName("Username");
+            entity.Property(e => e.Password).HasColumnName("PasswordHash");
+            // Otros mapeos de propiedades
         });
 
 

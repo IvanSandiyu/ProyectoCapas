@@ -23,15 +23,15 @@ namespace Ln.Service.Loggin
 
         public bool Validar(string user, string pass)
         {
-            
-            // Hashear la contraseña ingresada por el usuario
+
+            //Hashear la contraseña ingresada por el usuario
             string hashedPassword = HashPassword(pass);
 
-            if (_repositorio.VerificarCredenciales(user, hashedPassword)) loginExitoso = true;
+            if (_repositorio.VerificarCredenciales(user, pass)) loginExitoso = true;
             else loginExitoso = false;
 
             return loginExitoso;
-
+            
            
         }
         public string HashPassword(string password)

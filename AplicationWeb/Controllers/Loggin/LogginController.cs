@@ -5,6 +5,7 @@ using Ln.Service.Loggin;
 using Ln.Service.Usuarios;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
@@ -22,25 +23,25 @@ namespace AplicationWeb.Controllers.Loggin
             _repositorio = user;
         }
 
-        public IActionResult Loggin(ILogginService user)
+        [HttpGet]
+        public IActionResult Loggin()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Loggin(string username, string password ) 
+        public IActionResult ProcesarLoggin(string username, string password ) 
         {
             if (_repositorio.Validar(username, password))
             {
                 // Redirigir a la página principal si el login es exitoso
-                ViewBag.ErrorMessage = "ENTROO";
-                return RedirectToAction("Index", "Index");
+                return Redirect("google.com.ar");
+                //return RedirectToAction("Home", "Index");
+                //me tiro error en el username, al momento de validar
             }
             else
             {
-                // Mostrar un mensaje de error en la vista
-                ViewBag.ErrorMessage = "Usuario o contraseña incorrectos.";
-                return View();
+                return View("Loggin");
             }
         }
        

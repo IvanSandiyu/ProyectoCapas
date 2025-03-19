@@ -4,7 +4,8 @@ namespace AplicationWeb.Controllers.Index
 {
     public class IndexController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Home()
         {
             return View();
         }

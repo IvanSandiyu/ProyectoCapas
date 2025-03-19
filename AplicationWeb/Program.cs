@@ -6,10 +6,12 @@ using Ln.Service.Usuarios;
 using NLog.Web;
 using NLog;
 using Ln.Service.Loggin;
+using AplicationWeb.Controllers.Loggin;
+using Ad.DataContext.LogginRepositorio;
 
 
-var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-logger.Debug("wenas");
+//var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+//logger.Debug("wenas");
 
 try
 {
@@ -27,10 +29,13 @@ try
 
     builder.Services.AddScoped<IGenericRepositorio<Usuario>, UsuarioRepositorio>();
     builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-    builder.Services.AddScoped<ILogginService, LogginService>();//no se me esta haciendo la conec creo
+    builder.Services.AddScoped<ILogginService, LogginService>();//no se me esta haciendo la conec creo -.Registra LogginService
+    builder.Services.AddScoped<LogginRepositorio>(); // Registra LogginRepositorio
+    
 
-    builder.Logging.ClearProviders();
-    builder.Host.UseNLog();
+
+    //builder.Logging.ClearProviders();
+    //builder.Host.UseNLog();
 
 
     var app = builder.Build();
@@ -55,14 +60,22 @@ try
 
     app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "{controller=Loggin}/{action=Loggin}/{id?}");
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Index}/{action=Home}/{id?}");
+
+
 
     app.Run();
 }
 catch(Exception ex)
 {
-    logger.Error(ex, "Ha ocurrido un error");
-    
+    Console.WriteLine($"Error durante la inicialización: {ex.Message}");
+    Console.WriteLine(ex.StackTrace);
+    //logger.Error(ex, "Ha ocurrido un error");
+
 }
 finally
 {
