@@ -31,7 +31,13 @@ try
     builder.Services.AddScoped<IUsuarioService, UsuarioService>();
     builder.Services.AddScoped<ILogginService, LogginService>();//no se me esta haciendo la conec creo -.Registra LogginService
     builder.Services.AddScoped<LogginRepositorio>(); // Registra LogginRepositorio
-    
+    builder.Services.AddAuthentication("Cookies")
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Loggin/Loggin"; // Ruta al formulario de login
+    });
+
+
 
 
     //builder.Logging.ClearProviders();

@@ -3,10 +3,12 @@ using AplicationWeb.Models.ViewModels;
 using DTOs.Usuarios;
 using Ln.Service.Loggin;
 using Ln.Service.Usuarios;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -14,7 +16,7 @@ namespace AplicationWeb.Controllers.Loggin
 {
     public class LogginController : Controller
     {
-       // private readonly IUsuarioService _usuarioService;
+        // private readonly IUsuarioService _usuarioService;
         //private readonly ILogger _logger;
         private readonly ILogginService _repositorio;
 
@@ -30,21 +32,29 @@ namespace AplicationWeb.Controllers.Loggin
         }
 
         [HttpPost]
-        public IActionResult ProcesarLoggin(string username, string password ) 
+        public IActionResult ProcesarLoggin(string username, string password)
         {
             if (_repositorio.Validar(username, password))
             {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, username) 
+                };
+
+                var identity = new ClaimsIdentity(claims, "Cookies");
+                var principal = new ClaimsPrincipal(identity);
+
+                // Establecer la cookie de autenticación
+                HttpContext.SignInAsync("Cookies", principal).Wait();
                 // Redirigir a la página principal si el login es exitoso
-                return Redirect("google.com.ar");
-                //return RedirectToAction("Home", "Index");
-                //me tiro error en el username, al momento de validar
+                return Redirect("/Index/Home");
             }
             else
             {
                 return View("Loggin");
             }
         }
-       
+
 
 
         //[HttpGet]
