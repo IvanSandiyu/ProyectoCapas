@@ -23,14 +23,6 @@ namespace Ad.DataContext.LogginRepositorio
             {
                 throw new ArgumentException("Username and password cannot be null or empty");
             }
-
-    //        const string query = "SELECT COUNT(1) FROM CredencialesUsuarios WHERE Username = @username AND PasswordHash = @hashedPassword";
-    //        var parameters = new[]
-    //        {
-    //    new SqlParameter("@username", username),
-    //    new SqlParameter("@hashedPassword", hashedPassword)
-    //};
-
             int resultado = _dbContext.Credencial
                                .Count(c => c.Username == username && c.Password == hashedPassword);
 
