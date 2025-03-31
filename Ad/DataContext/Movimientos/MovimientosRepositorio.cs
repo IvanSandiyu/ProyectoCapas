@@ -1,4 +1,5 @@
 ﻿using DTOs.Movimientos;
+using DTOs.Paginacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,11 @@ namespace Ad.DataContext.Movimientos
         }
 
         public Task<MovimientosDTO> Obtener(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PaginacionDTO<MovimientosDTO>> ObtenerProductosPaginados(int page, int pageSize)
         {
             throw new NotImplementedException();
         }

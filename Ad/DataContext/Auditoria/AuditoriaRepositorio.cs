@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs.Auditoria;
+using DTOs.Paginacion;
 
 namespace Ad.DataContext.Auditoria
 {
@@ -41,6 +42,11 @@ namespace Ad.DataContext.Auditoria
         }
 
         public Task<IQueryable<AuditoriaDTO>> ObtenerTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PaginacionDTO<AuditoriaDTO>> ObtenerProductosPaginados(int page, int pageSize)
         {
             throw new NotImplementedException();
         }

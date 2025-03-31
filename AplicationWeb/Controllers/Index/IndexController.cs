@@ -5,6 +5,8 @@ using Ln.Service.Producto;
 using Ad.DataContext.Categoria;
 using Ad.DataContext.Cliente;
 using Ad.DataContext.ProductoRepositorio;
+using DTOs.Producto;
+using Microsoft.EntityFrameworkCore;
 
 namespace AplicationWeb.Controllers.Index
 {
@@ -13,8 +15,7 @@ namespace AplicationWeb.Controllers.Index
     {
         private readonly ILogginService _repositorio;
         private readonly IProductoService _productoService;
-        //Habria que mostrar los productos
-        //select P.Nombre, S.CantidadActual, C.Nombre as Categoria,  PR.NombreEmpresa,  H.PrecioPublico FROM PRODUCTO P, STOCK S , CATEGORIA C, PROVEEDOR PR, HISTORIALPRODUCTOS H
+        
         public IndexController(ILogginService user, IProductoService producto)
         {
             
@@ -37,6 +38,37 @@ namespace AplicationWeb.Controllers.Index
             var productos = await _productoService.ObtenerTodos();
             return Json(productos.ToList());
         }
+
+        [HttpGet]
+        [Route("api/productos")]
+
+        public async Task<IActionResult> GetProductos(int page = 1, int pageSize = 10)
+        {
+            var productosPaginados = await _productoService.ObtenerProductosPaginados(page, pageSize);
+
+            var resultado = new
+            {
+                items = productosPaginados,
+                totalCount = productosPaginados.TotalCount
+            };
+
+            return Ok(resultado); // Devuelve los datos en formato JSON
+        }
+
+        [HttpGet]
+        public IActionResult CrearProducto() 
+        {
+            //Falta hacer que al hacerle click cambie de pestaña
+            return Redirect("/Producto/CrearProducto");
+        }
+
+        //[HttpGet]
+        //[Route("api/busqueda")]
+        //public async Task<IActionResult> BusquedaPorFiltros(string filter)
+        //{
+        //    var products = await _productoService.ProductosPorFiltro(filter);
+        //    return Ok(products);
+        //}
 
 
     }

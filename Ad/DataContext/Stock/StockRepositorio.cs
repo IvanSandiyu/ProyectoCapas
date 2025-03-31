@@ -1,4 +1,5 @@
-﻿using DTOs.Stock;
+﻿using DTOs.Paginacion;
+using DTOs.Stock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace Ad.DataContext.Stock
         }
 
         public Task<StockDTO> Obtener(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PaginacionDTO<StockDTO>> ObtenerProductosPaginados(int page, int pageSize)
         {
             throw new NotImplementedException();
         }

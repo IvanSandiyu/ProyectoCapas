@@ -1,4 +1,5 @@
-﻿using DTOs.Persona;
+﻿using DTOs.Paginacion;
+using DTOs.Persona;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,11 @@ namespace Ad.DataContext.Repositorio.Persona
         public async Task<PersonaDTO> Obtener(int id)
         {
             return await _dbContext.Persona.FindAsync(id);
+        }
+
+        public Task<PaginacionDTO<PersonaDTO>> ObtenerProductosPaginados(int page, int pageSize)
+        {
+            throw new NotImplementedException();
         }
 
         Task<IQueryable<PersonaDTO>> IGenericRepositorio<PersonaDTO>.ObtenerTodos()

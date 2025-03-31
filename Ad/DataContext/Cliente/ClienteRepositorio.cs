@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTOs.Auditoria;
 using DTOs.Cliente;
+using DTOs.Paginacion;
 namespace Ad.DataContext.Cliente
 {
     public class ClienteRepositorio : IGenericRepositorio<ClienteDTO>
@@ -41,6 +43,15 @@ namespace Ad.DataContext.Cliente
         }
 
         public Task<IQueryable<ClienteDTO>> ObtenerTodos()
+        {
+            throw new NotImplementedException();
+        }
+        public Task<PaginacionDTO<AuditoriaDTO>> ObtenerProductosPaginados(int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<PaginacionDTO<ClienteDTO>> IGenericRepositorio<ClienteDTO>.ObtenerProductosPaginados(int page, int pageSize)
         {
             throw new NotImplementedException();
         }

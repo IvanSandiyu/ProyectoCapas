@@ -1,4 +1,5 @@
 ﻿using DTOs.HistorialDeudas;
+using DTOs.Paginacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,11 @@ namespace Ad.DataContext.HistorialDeudas
         }
 
         public Task<HistorialDeudasDTO> Obtener(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PaginacionDTO<HistorialDeudasDTO>> ObtenerProductosPaginados(int page, int pageSize)
         {
             throw new NotImplementedException();
         }

@@ -20,3 +20,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Para Webkit (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    filter: invert(30%); /* Ajusta el porcentaje para cambiar la intensidad del gris */
+}
+
+/* Para Firefox (los botones no son personalizables directamente, pero puedes ocultarlos y agregar botones personalizados si es necesario) */
+input[type="number"] {
+    -moz-appearance: textfield;
+}

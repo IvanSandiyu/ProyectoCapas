@@ -1,4 +1,6 @@
-﻿using DTOs.Deudas;
+﻿using DTOs.Auditoria;
+using DTOs.Deudas;
+using DTOs.Paginacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +47,10 @@ namespace Ad.DataContext.Deudas
         {
             throw new NotImplementedException();
         }
-    
+        public Task<PaginacionDTO<DeudasDTO>> ObtenerProductosPaginados(int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

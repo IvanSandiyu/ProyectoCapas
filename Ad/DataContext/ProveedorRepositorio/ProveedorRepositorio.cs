@@ -1,4 +1,5 @@
-﻿using DTOs.Persona;
+﻿using DTOs.Paginacion;
+using DTOs.Persona;
 using DTOs.Proveedor;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Ad.DataContext.ProveedorRepositorio
 
         public async Task<bool> Eliminar(int id)
         {
-            ProveedorDTO usuario = _dbContext.Proveedor.First(u => u.idProveedor == id);
+            ProveedorDTO usuario = _dbContext.Proveedor.First(u => u.IdProveedor == id);
             _dbContext.Proveedor.Remove(usuario);
             await _dbContext.SaveChangesAsync();
             return true;
@@ -40,6 +41,11 @@ namespace Ad.DataContext.ProveedorRepositorio
         public async Task<ProveedorDTO> Obtener(int id)
         {
             return await _dbContext.Proveedor.FindAsync(id);
+        }
+
+        public Task<PaginacionDTO<ProveedorDTO>> ObtenerProductosPaginados(int page, int pageSize)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IQueryable<ProveedorDTO>> ObtenerTodos()

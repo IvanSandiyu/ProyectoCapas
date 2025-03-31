@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs;
+using DTOs.Paginacion;
 using DTOs.Usuarios;
 using Microsoft.IdentityModel.Tokens;
 
@@ -41,6 +42,11 @@ namespace Ad.DataContext.Repositorio
         public async Task<Usuario> Obtener(int id)
         {
             return await _dbContext.Usuarios.FindAsync(id);
+        }
+
+        public Task<PaginacionDTO<Usuario>> ObtenerProductosPaginados(int page, int pageSize)
+        {
+            throw new NotImplementedException();
         }
 
         Task<IQueryable<Usuario>> IGenericRepositorio<Usuario>.ObtenerTodos()

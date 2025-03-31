@@ -1,4 +1,5 @@
-﻿using DTOs.Producto;
+﻿using DTOs.Paginacion;
+using DTOs.Producto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Ln.Service.Producto
 {
     public interface IProductoService
     {
-        Task<bool> Insertar(ProductoDTO model);
+        Task<bool> Insertar(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible,float precioProducto,float porcentajeGanancia);
         Task<bool> Actualizar(ProductoDTO models);
 
         Task<bool> Eliminar(int id);
@@ -19,5 +20,8 @@ namespace Ln.Service.Producto
         Task<IQueryable<ProductoDTO>> ObtenerTodos();
 
         Task<ProductoDTO> ObtenerPorNombre(string nombre);
+        Task<PaginacionDTO<ProductoDTO>> ObtenerProductosPaginados(int a, int b);
+
+        //Task<ProductoDTO> ProductosPorFiltro(string filtro);
     }
 }

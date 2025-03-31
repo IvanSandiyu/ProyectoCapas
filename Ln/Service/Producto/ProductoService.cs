@@ -1,4 +1,6 @@
 ﻿using Ad.DataContext;
+using Ad.DataContext.ProductoRepositorio;
+using DTOs.Paginacion;
 using DTOs.Producto;
 using DTOs.Proveedor;
 using System;
@@ -12,9 +14,11 @@ namespace Ln.Service.Producto
     public class ProductoService : IProductoService
     {
         readonly IGenericRepositorio<ProductoDTO> _repositorio;
-        public ProductoService(IGenericRepositorio<ProductoDTO> producto)
+        readonly IProductoRepositorio<ProductoDTO> _repositorioProducto;
+        public ProductoService(IGenericRepositorio<ProductoDTO> producto, IProductoRepositorio<ProductoDTO> repositorioProducto)
         {
             _repositorio = producto;
+            _repositorioProducto = repositorioProducto;
         }
         public async Task<bool> Actualizar(ProductoDTO models)
         {
@@ -26,9 +30,10 @@ namespace Ln.Service.Producto
             return await _repositorio.Eliminar(id);
         }
 
-        public async Task<bool> Insertar(ProductoDTO model)
+        public async Task<bool> Insertar(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible,float precioProducto,float porcentajeGanancia)
         {
-            return await _repositorio.Insertar(model);
+
+            return await _repositorioProducto.InsertarProducto(nombreProducto,nombreProveedor,nombreCategoria,stockDisponible,precioProducto,porcentajeGanancia);
         }
 
         public async Task<ProductoDTO> Obtener(int id)
@@ -47,5 +52,14 @@ namespace Ln.Service.Producto
         {
             return await _repositorio.ObtenerTodos();
         }
+        public async Task<PaginacionDTO<ProductoDTO>> ObtenerProductosPaginados(int page = 1, int pageSize = 10)
+        {
+            return await _repositorio.ObtenerProductosPaginados(page, pageSize);
+        }
+
+        //public async Task<List<ProductoDTO>> ProductosPorFiltro(string filtro)
+        //{
+        //    return await _repositorio.ProductosPorFiltro(filtro);
+        //}
     }
 }

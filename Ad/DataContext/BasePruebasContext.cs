@@ -89,7 +89,8 @@ public partial class BasePruebasContext : DbContext
         modelBuilder.Entity<ProveedorDTO>(entity =>
         {
             entity.ToTable("PROVEEDOR"); // Nombre correcto de la tabla
-            entity.HasKey(e => e.idProveedor).HasName("PK_Id_proveedor");  // Definir la clave primaria correctamente
+            entity.HasKey(e => e.IdProveedor).HasName("PK__PROVEEDO__6704E5A88ECCE312");  // Definir la clave primaria correctamente
+            entity.Property(e => e.IdProveedor).HasColumnName("Id_proveedor"); // Map
             entity.Property(e => e.NombreEmpresa).HasColumnName("NombreEmpresa");
             entity.Property(e => e.DiasVisita).HasColumnName("DiasVisita");
             entity.Property(e => e.TipoProducto).HasColumnName("TipoProducto");
@@ -105,37 +106,39 @@ public partial class BasePruebasContext : DbContext
             entity.Property(e => e.CategoriaId).HasColumnName("Categoria_id");
             entity.Property(e => e.Nombre).HasColumnName("Nombre");
 
-            // Configurar relación con Proveedor (FK)
-            entity.HasOne(p => p.Proveedor) // Relación uno a uno o uno a muchos
-                  .WithMany()
-                  .HasForeignKey(p => p.ProveedorId)
-                  .HasConstraintName("PK__PROVEEDO__6704E5A88ECCE312"); // Nombre de la FK en la base de datos
+            //// Configurar relación con Proveedor (FK)
+            //entity.HasOne(p => p.Proveedor) // Relación uno a uno o uno a muchos
+            //      .WithMany()
+            //      .HasForeignKey(p => p.ProveedorId)
+            //      .HasConstraintName("FK__PROVEEDO__6704E5A88ECCE312"); // Nombre de la FK en la base de datos
 
             // Configurar relación con Categoria (FK)
-            entity.HasOne(p => p.Categoria) // Relación uno a uno o uno a muchos
-                  .WithMany()
-                  .HasForeignKey(p => p.Categoria)
-                  .HasConstraintName("PK__CATEGORI__4A033A9350BC54B5"); // Nombre de la FK en la base de datos
+            //entity.HasOne(p => p.Categoria) // Relación uno a uno o uno a muchos
+            //      .WithMany()
+            //      .HasForeignKey(p => p.Categoria)
+            //      .HasConstraintName("FK__CATEGORI__4A033A9350BC54B5"); // Nombre de la FK en la base de datos
 
-    });
+        });
         modelBuilder.Entity<StockDTO>(entity =>
         {
-            entity.ToTable("STOCK "); // Nombre correcto de la tabla
-            entity.HasKey(e => e.IdStock).HasName("PK_Id_stock");  // Definir la clave primaria correctamente
+            entity.ToTable("STOCK"); // Nombre correcto de la tabla
+            entity.HasKey(e => e.IdStock).HasName("PK__STOCK__89C929190FCCB1A0");  // Definir la clave primaria correctamente
+            entity.Property(e => e.IdStock).HasColumnName("Id_stock"); // Map
             entity.Property(e => e.ProductoId).HasColumnName("Producto_id");
             entity.Property(e => e.CantidadActual).HasColumnName("CantidadActual");
             entity.Property(e => e.FechaUltimaActualizacion).HasColumnName("FechaUltimaActualizacion");
-            // Configurar relación con Proveedor (FK)
-            entity.HasOne(p => p.Producto) // Relación uno a uno o uno a muchos
-                  .WithMany()
-                  .HasForeignKey(p => p.Producto)
-                  .HasConstraintName("FK__STOCK__Producto___7F2BE32F"); // Nombre de la FK en la base de datos
+            // Configurar relación con Producto (FK)
+            //entity.HasOne(p => p.Producto) // Relación uno a uno o uno a muchos
+            //      .WithMany()
+            //      .HasForeignKey(p => p.Producto)
+            //      .HasConstraintName("FK__STOCK__Producto___7F2BE32F"); // Nombre de la FK en la base de datos
 
         });
         modelBuilder.Entity<MovimientosDTO>(entity =>
         {
             entity.ToTable("MOVIMIENTOS"); // Nombre correcto de la tabla
-            entity.HasKey(e => e.IdVenta).HasName("PK_Id_venta");  // Definir la clave primaria correctamente
+            entity.HasKey(e => e.IdVenta).HasName("PK__MOVIMIEN__F077E880A6E0CF35");  // Definir la clave primaria correctamente 
+            entity.Property(e => e.IdVenta).HasColumnName("Id_venta");
             entity.Property(e => e.StockId).HasColumnName("Stock_id");
             entity.Property(e => e.Fecha).HasColumnName("Fecha");
             entity.Property(e => e.Cantidad).HasColumnName("Cantidad");
@@ -149,7 +152,8 @@ public partial class BasePruebasContext : DbContext
         modelBuilder.Entity<HistorialProductosDTO>(entity =>
         {
             entity.ToTable("HISTORIALPRODUCTOS"); // Nombre correcto de la tabla
-            entity.HasKey(e => e.IdHistorial).HasName("PK_Id_historial");  // Definir la clave primaria correctamente
+            entity.HasKey(e => e.IdHistorial).HasName("PK__HISTORIA__EA5F513B60A3E306");  // Definir la clave primaria correctamente
+            entity.Property(e => e.IdHistorial).HasColumnName("Id_historial");
             entity.Property(e => e.ProductoId).HasColumnName("Producto_id");
             entity.Property(e => e.FechaCambio).HasColumnName("FechaCambio");
             entity.Property(e => e.PrecioUnitario).HasColumnName("PrecioUnitario");
@@ -164,7 +168,8 @@ public partial class BasePruebasContext : DbContext
         modelBuilder.Entity<AuditoriaDTO>(entity =>
         {
             entity.ToTable("Auditoria"); // Nombre correcto de la tabla
-            entity.HasKey(e => e.idAuditoria).HasName("PK_Id_auditoria");  // Definir la clave primaria correctamente
+            entity.HasKey(e => e.idAuditoria).HasName("PK__Auditori__835B9D14687A898C");  // Definir la clave primaria correctamente
+            entity.Property(e => e.idAuditoria).HasColumnName("Id_auditoria");
             entity.Property(e => e.IdEntidad).HasColumnName("IdEntidad");
             entity.Property(e => e.Usuario).HasColumnName("Usuario");
             entity.Property(e => e.Fecha).HasColumnName("Fecha");
@@ -178,7 +183,8 @@ public partial class BasePruebasContext : DbContext
         modelBuilder.Entity<ClienteDTO>(entity =>
         {
             entity.ToTable("CLIENTE"); // Nombre correcto de la tabla
-            entity.HasKey(e => e.IdCliente).HasName("PK_Id_cliente");  // Definir la clave primaria correctamente
+            entity.HasKey(e => e.IdCliente).HasName("PK__CLIENTE__FCE03992F12E2D1A");  // Definir la clave primaria correctamente
+            entity.Property(e => e.IdCliente).HasColumnName("Id_cliente");
             entity.Property(e => e.PersonaId).HasColumnName("Persona_id");
             entity.Property(e => e.UltimaCompra).HasColumnName("UltimaCompra");
             entity.Property(e => e.HistorialCompras).HasColumnName("HistorialCompras");
@@ -189,7 +195,8 @@ public partial class BasePruebasContext : DbContext
         modelBuilder.Entity<DeudasDTO>(entity =>
         {
             entity.ToTable("DEUDAS"); // Nombre correcto de la tabla
-            entity.HasKey(e => e.IdDeuda).HasName("PK_Id_deuda");  // Definir la clave primaria correctamente
+            entity.HasKey(e => e.IdDeuda).HasName("PK__DEUDAS__F11EBF6AAB6BDB90");  // Definir la clave primaria correctamente
+            entity.Property(e => e.IdDeuda).HasColumnName("Id_deuda");
             entity.Property(e => e.ClienteId).HasColumnName("Cliente_id");
             entity.Property(e => e.PersonaId).HasColumnName("Persona_id");
             entity.Property(e => e.Monto).HasColumnName("Monto");

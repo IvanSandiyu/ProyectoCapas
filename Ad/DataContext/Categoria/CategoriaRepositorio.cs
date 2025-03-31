@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs.Categoria;
+using DTOs.Paginacion;
 
 namespace Ad.DataContext.Categoria
 {
@@ -39,6 +40,11 @@ namespace Ad.DataContext.Categoria
         public async Task<CategoriaDTO> Obtener(int id)
         {
             return await _dbContext.Categoria.FindAsync(id);
+        }
+
+        public Task<PaginacionDTO<CategoriaDTO>> ObtenerProductosPaginados(int page, int pageSize)
+        {
+            throw new NotImplementedException();
         }
 
         Task<IQueryable<CategoriaDTO>> IGenericRepositorio<CategoriaDTO>.ObtenerTodos()

@@ -40,6 +40,7 @@ using Ln.Service.Movimientos;
 using Ln.Service.Stock;
 using Ln.Service.Producto;
 using DTOs.Producto;
+using DTOs.Paginacion;
 using Ad.DataContext.ProductoRepositorio;
 
 
@@ -71,6 +72,7 @@ try
     builder.Services.AddScoped<IGenericRepositorio<ProveedorDTO>, ProveedorRepositorio>();
     builder.Services.AddScoped<IProveedorService, ProveedorService>();
     builder.Services.AddScoped<IGenericRepositorio<ProductoDTO>, ProductoRepositorio>();
+    builder.Services.AddScoped<IProductoRepositorio<ProductoDTO>, ProductoRepositorio>();
     builder.Services.AddScoped<IProductoService, ProductoService>();
     builder.Services.AddScoped<IGenericRepositorio<AuditoriaDTO>, AuditoriaRepositorio>();
     builder.Services.AddScoped<IAuditoriaService, AuditoriaService>();
@@ -132,6 +134,10 @@ try
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Index}/{action=Home}/{id?}");
+
+    app.MapControllerRoute(
+       name: "default",
+       pattern: "{controller=Producto}/{action=CrearProducto}/{id?}");
 
 
 
