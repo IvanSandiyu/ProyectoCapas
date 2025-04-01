@@ -22,7 +22,7 @@
                     <tr class="border-b dark:border-gray-700">
                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"> ${producto.nombre} </th>
                     <td class="px-4 py-3">${producto.stockDisponible.cantidadActual}</td>
-                    <td class="px-4 py-3">${producto.categoriaId}</td>
+                    <td class="px-4 py-3">${producto.categoria.nombre}</td>
                     <td class="px-4 py-3 max-w-[12rem] truncate">${producto.nombreProveedor}</td>
                     <td class="px-4 py-3">$1000</td>
                     </tr>

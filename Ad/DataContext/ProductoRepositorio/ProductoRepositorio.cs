@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Ad.DataContext.ProductoRepositorio
 {
-    public class ProductoRepositorio: IGenericRepositorio<ProductoDTO> , IProductoRepositorio<ProductoDTO>
+    public class ProductoRepositorio : IGenericRepositorio<ProductoDTO>, IProductoRepositorio<ProductoDTO>
     {
         private readonly BasePruebasContext _dbContext;
         public ProductoRepositorio(BasePruebasContext context)
@@ -37,12 +37,13 @@ namespace Ad.DataContext.ProductoRepositorio
             return true;
         }
 
-        public async Task<bool> InsertarProducto(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible,float precioProducto,float porcentajeGanancia)
+        public async Task<bool> InsertarProducto(string nombreProducto, string nombreProveedor, string nombreCategoria, int stockDisponible, float precioProducto, float porcentajeGanancia)
         {
             if (string.IsNullOrWhiteSpace(nombreProveedor) || string.IsNullOrWhiteSpace(nombreCategoria) || string.IsNullOrWhiteSpace(nombreProducto))
             {
                 throw new Exception("El nombre del proveedor o la categoría no puede estar vacío.");
             }
+
             //var proveedor = await _dbContext.Proveedor.FirstOrDefaultAsync(p => p.NombreEmpresa.ToUpper() == nombreProveedor.ToUpper().Trim());
             //var categoria = await _dbContext.Categoria.FirstOrDefaultAsync(c => c.Nombre.ToUpper() == nombreCategoria.ToUpper().Trim());
 
@@ -54,10 +55,10 @@ namespace Ad.DataContext.ProductoRepositorio
             var producto = new ProductoDTO
             {
                 Nombre = nombreProducto,
-                ProveedorId = 1,//proveedor.IdProveedor,
-                CategoriaId = 1//categoria.IdCategoria,
+                ProveedorId = 1,
+                CategoriaId = 1,
             };
-           
+
 
             using (var transaction = await _dbContext.Database.BeginTransactionAsync())
             {
@@ -74,6 +75,8 @@ namespace Ad.DataContext.ProductoRepositorio
                     _dbContext.Stock.Add(stock);
                     await _dbContext.SaveChangesAsync();
 
+
+
                     await transaction.CommitAsync();
                     return true;
                 }
@@ -83,58 +86,8 @@ namespace Ad.DataContext.ProductoRepositorio
                     return false;
                 }
             }
-
-
-
         }
 
-        //ProveedorDTO proveedor = _dbContext.Proveedor.Where(p => p.NombreEmpresa.ToUpper() == nombreProveedor.ToUpper().Trim()).SingleOrDefault();
-        //CategoriaDTO categoria = _dbContext.Categoria.Where(c => c.Nombre.ToUpper() == nombreCategoria.ToUpper().Trim()).SingleOrDefault();
-
-        //if (proveedor == null || categoria == null)
-        //{
-        //    throw new Exception($"No se encontró un proveedor o categoria");
-
-        //}
-
-        //model.ProveedorId = proveedor.IdProveedor;
-        //model.CategoriaId = categoria.IdCategoria;
-
-
-        //using (var transaction = await _dbContext.Database.BeginTransactionAsync())
-        //{
-        //    try
-        //    {
-        //        _dbContext.Producto.Add(model);
-        //        await _dbContext.SaveChangesAsync();
-
-        //        StockDTO stock = new StockDTO
-        //        {
-        //            ProductoId = model.IdProducto,
-        //            CantidadActual = stockDisponible
-        //        };
-        //        _dbContext.Stock.Add(stock);
-        //        await _dbContext.SaveChangesAsync();
-
-        //        await transaction.CommitAsync();
-        //        return true;
-        //    }
-        //    catch
-        //    {
-        //        await transaction.RollbackAsync();
-        //        return false;
-        //    }
-        //}
-        //_dbContext.Producto.Add(model);
-        //    await _dbContext.SaveChangesAsync();
-
-            //StockDTO stock = new StockDTO();
-            //stock.ProductoId = model.IdProducto;
-            //stock.CantidadActual = stockDisponible;
-            //_dbContext.Stock.Add(stock);
-            //return true;
-
-        
 
         public async Task<ProductoDTO> Obtener(int id)
         {
@@ -143,20 +96,21 @@ namespace Ad.DataContext.ProductoRepositorio
 
         public async Task<IQueryable<ProductoDTO>> ObtenerTodos()
         {
-            
+
             IQueryable<ProductoDTO> queryProductoSQL = _dbContext.Producto.Select(p => new ProductoDTO
             {
                 IdProducto = p.IdProducto,
                 Nombre = p.Nombre,
                 ProveedorId = p.ProveedorId,
+                CategoriaId = p.CategoriaId,
                 StockDisponible = _dbContext.Stock.Where(s => s.ProductoId == p.IdProducto).FirstOrDefault(),
-                NombreProveedor = _dbContext.Proveedor.FirstOrDefault(pr => pr.IdProveedor == p.ProveedorId).NombreEmpresa
+                NombreProveedor = _dbContext.Proveedor.FirstOrDefault(pr => pr.IdProveedor == p.ProveedorId).NombreEmpresa,
+                NombreCategoria = _dbContext.Categoria.FirstOrDefault(c => c.IdCategoria == p.Categoria.IdCategoria).Nombre,
+                Categoria = _dbContext.Categoria.FirstOrDefault(c => c.IdCategoria == p.Categoria.IdCategoria)
             });
 
-            return await Task.FromResult(queryProductoSQL); // Simula una operación asincrón
-            //IQueryable <ProductoDTO> queryProdcutoSQL = _dbContext.Producto;
-            ////return queryUsuarioSQL;
-            //throw new NotImplementedException();
+            return await Task.FromResult(queryProductoSQL);
+            
         }
 
         public async Task<PaginacionDTO<ProductoDTO>> ObtenerProductosPaginados(int page = 1, int pageSize = 10)

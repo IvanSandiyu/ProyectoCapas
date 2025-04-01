@@ -13,17 +13,18 @@ namespace DTOs.Producto
     public class ProductoDTO
     {
         public int IdProducto { get; set; }
+        public string Nombre { get; set; }
         public int? ProveedorId { get; set; }
         public int? CategoriaId { get; set; }
-        public string Nombre { get; set; }
+        
         public StockDTO StockDisponible { get; set; }
 
         [NotMapped]
         public string NombreProveedor { get; set; }
 
        
-
-        [NotMapped]
         public string  NombreCategoria { get; set;}
+
+        public CategoriaDTO Categoria { get; set; }
     }
 }

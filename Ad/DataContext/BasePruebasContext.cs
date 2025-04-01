@@ -112,10 +112,10 @@ public partial class BasePruebasContext : DbContext
             //      .HasForeignKey(p => p.ProveedorId)
             //      .HasConstraintName("FK__PROVEEDO__6704E5A88ECCE312"); // Nombre de la FK en la base de datos
 
-            // Configurar relación con Categoria (FK)
+            //Configurar relación con Categoria(FK)
             //entity.HasOne(p => p.Categoria) // Relación uno a uno o uno a muchos
             //      .WithMany()
-            //      .HasForeignKey(p => p.Categoria)
+            //      .HasForeignKey(p => p.CategoriaId)
             //      .HasConstraintName("FK__CATEGORI__4A033A9350BC54B5"); // Nombre de la FK en la base de datos
 
         });
@@ -209,7 +209,8 @@ public partial class BasePruebasContext : DbContext
         modelBuilder.Entity<CategoriaDTO>(entity =>
         {
             entity.ToTable("CATEGORIA"); // Nombre correcto de la tabla
-            entity.HasKey(e => e.IdCategoria).HasName("PK_Id_categoria");  // Definir la clave primaria correctamente
+            entity.HasKey(e => e.IdCategoria).HasName("PK__CATEGORI__4A033A9350BC54B5");  // Definir la clave primaria correctamente
+            entity.Property(e => e.IdCategoria).HasColumnName("Id_categoria");
             entity.Property(e => e.Nombre).HasColumnName("Nombre");
             
 

@@ -20,21 +20,20 @@ namespace AplicationWeb.Controllers.Index
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreacionProducto(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible,float precioProducto, float porcentajeGanancia)
+        public async Task<IActionResult> CreacionProducto(string nombreProducto, string nombreProveedor, string nombreCategoria, int stockDisponible, float precioProducto, float porcentajeGanancia)
         {
             if (string.IsNullOrEmpty(nombreProducto) || string.IsNullOrEmpty(nombreProveedor) || string.IsNullOrEmpty(nombreCategoria))
             {
-                return BadRequest();
+                return Json(new { success = false, message = "Ocurrió un error al crear el producto." });
             }
-            //ProductoDTO producto = new ProductoDTO { Nombre = nombreProducto };
 
             bool respuesta = await _productoService.Insertar(nombreProducto, nombreProveedor, nombreCategoria, stockDisponible, precioProducto, porcentajeGanancia);
 
             if (respuesta)
             {
-                return Ok();
+                return Json(new { success = true, message = "El producto se creó correctamente." });
             }
-            return BadRequest("Ocurrio un error al crear el producto");
+            return Json(new { success = false, message = "Ocurrió un error al crear el producto." });
         }
 
 

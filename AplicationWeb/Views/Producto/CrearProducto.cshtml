@@ -1,6 +1,10 @@
 ﻿<link rel="stylesheet" href="/css/app.min.css">
 <script src="/Scripts/Producto/CrearProducto.js"></script>
 
+@{
+    var successMessage = TempData["SuccessMessage"] as string ?? "";
+    var errorMessage = TempData["ErrorMessage"] as string ?? "";
+}
 
 <!-- Start block -->
 <html lang="en" class="dark">
@@ -9,8 +13,6 @@
         @Html.Partial("BarraNavegacion")
     </header>
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased min-h-screen flex items-center justify-center">
-
-
         <form class="max-w-md mx-auto space-y-4 md:space-y-6" action="/Producto/CreacionProducto" method="post" id="formulario">
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" name="nombreProducto" id="nombreProducto" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
@@ -45,13 +47,9 @@
                 </div>
             </div>
            
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear</button>
+            <button type="submit" id="mostrarMensaje" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear</button>
+            <div id="mensajeVerificacion" class="hidden mt-2 px-4 py-2 rounded-lg shadow-lg text-white text-sm font-semibold transition-opacity duration-500"></div>
         </form>
-
     </section>
-    
-
-    
-   
     </body>
 </html>
