@@ -30,10 +30,10 @@ namespace Ln.Service.Producto
             return await _repositorio.Eliminar(id);
         }
 
-        public async Task<bool> Insertar(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible,float precioProducto,float porcentajeGanancia)
+        public async Task<bool> Insertar(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible, decimal precioProducto, decimal porcentajeGanancia, decimal precioPublico)
         {
 
-            return await _repositorioProducto.InsertarProducto(nombreProducto,nombreProveedor,nombreCategoria,stockDisponible,precioProducto,porcentajeGanancia);
+            return await _repositorioProducto.InsertarProducto(nombreProducto,nombreProveedor,nombreCategoria,stockDisponible,precioProducto,porcentajeGanancia, precioPublico);
         }
 
         public async Task<ProductoDTO> Obtener(int id)

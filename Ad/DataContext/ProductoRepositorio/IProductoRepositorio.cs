@@ -9,7 +9,7 @@ namespace Ad.DataContext.ProductoRepositorio
 {
     public interface IProductoRepositorio<ProductoDTO>
     {
-        Task<bool> InsertarProducto(string nombreProducto, string nombreProveedor, string nombreCategoria, int stockDisponible, float precioProducto, float porcentajeGanancia);
+        Task<bool> InsertarProducto(string nombreProducto, string nombreProveedor, string nombreCategoria, int stockDisponible, decimal precioProducto, decimal porcentajeGanancia, decimal precioPublico);
 
     }
 }

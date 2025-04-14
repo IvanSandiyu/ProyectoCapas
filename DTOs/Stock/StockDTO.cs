@@ -12,7 +12,7 @@ namespace DTOs.Stock
         public int IdStock { get; set; }
         public int ProductoId { get; set; }
         public int CantidadActual { get; set; }
-        public DateTime FechaUltimaActualizacion { get; set; }
+        public DateTime? FechaUltimaActualizacion { get; set; }
         public ProductoDTO Producto { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DTOs.Categoria;
+using DTOs.HistorialProductos;
 using DTOs.Proveedor;
 using DTOs.Stock;
 using System;
@@ -20,10 +21,13 @@ namespace DTOs.Producto
         public StockDTO StockDisponible { get; set; }
 
         [NotMapped]
-        public string NombreProveedor { get; set; }
+        public HistorialProductosDTO? HistorialProductos { get; set; }
 
-       
-        public string  NombreCategoria { get; set;}
+        [NotMapped]
+        public string? NombreProveedor { get; set; }
+
+        [NotMapped]
+        public string?  NombreCategoria { get; set;}
 
         public CategoriaDTO Categoria { get; set; }
     }

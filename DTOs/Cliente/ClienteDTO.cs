@@ -12,6 +12,6 @@ namespace DTOs.Cliente
         public int PersonaId { get; set; }
         public DateTime UltimaCompra { get; set; }
         public string HistorialCompras { get; set; }
-        public float Saldo { get; set; }
+        public decimal Saldo { get; set; }
     }
 }

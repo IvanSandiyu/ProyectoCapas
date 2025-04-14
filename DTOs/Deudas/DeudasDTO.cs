@@ -11,7 +11,7 @@ namespace DTOs.Deudas
         public int IdDeuda { get; set; }
         public int ClienteId { get; set; }
         public int PersonaId { get; set; }
-        public float Monto { get; set; }
+        public decimal Monto { get; set; }
         public DateTime Fecha { get; set; }
         public bool Estado { get; set; }
         public string TipoDeuda { get; set; }

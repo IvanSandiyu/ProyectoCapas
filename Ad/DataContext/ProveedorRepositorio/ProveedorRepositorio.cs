@@ -1,4 +1,5 @@
-﻿using DTOs.Paginacion;
+﻿using DTOs.HistorialProductos;
+using DTOs.Paginacion;
 using DTOs.Persona;
 using DTOs.Proveedor;
 using System;
@@ -50,9 +51,24 @@ namespace Ad.DataContext.ProveedorRepositorio
 
         public async Task<IQueryable<ProveedorDTO>> ObtenerTodos()
         {
-            //IQueryable<Usuario> queryUsuarioSQL = _dbContext.Usuarios;
-            //return queryUsuarioSQL;
-            throw new NotImplementedException();
+             IQueryable < ProveedorDTO > queryProductoSQL = _dbContext.Proveedor.Select(p => new ProveedorDTO
+             {
+                IdProveedor = p.IdProveedor,
+                NombreEmpresa = p.NombreEmpresa,
+                DiasVisita = p.DiasVisita,
+                //TipoProducto = p.TipoProducto,
+                Estado = p.Estado,
+                Telefono = p.Telefono,
+                DatosAdicionales = p.DatosAdicionales,
+                //StockDisponible = _dbContext.Stock.Where(s => s.ProductoId == p.IdProducto).FirstOrDefault(),
+                //NombreProveedor = _dbContext.Proveedor.FirstOrDefault(pr => pr.IdProveedor == p.ProveedorId).NombreEmpresa,
+                ////NombreCategoria = _dbContext.Categoria.FirstOrDefault(c => c.IdCategoria == p.Categoria.IdCategoria).Nombre,
+                //Categoria = _dbContext.Categoria.FirstOrDefault(c => c.IdCategoria == p.Categoria.IdCategoria),
+                //HistorialProductos = _dbContext.HistorialProductos.Where(h => h.ProductoId == p.IdProducto).OrderByDescending(h => h.FechaCambio).FirstOrDefault() ?? new HistorialProductosDTO { PrecioPublico = 0 }
+
+            });
+
+            return await Task.FromResult(queryProductoSQL);
         }
     }
 }

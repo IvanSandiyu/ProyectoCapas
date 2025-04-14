@@ -10,7 +10,7 @@ namespace Ln.Service.Producto
 {
     public interface IProductoService
     {
-        Task<bool> Insertar(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible,float precioProducto,float porcentajeGanancia);
+        Task<bool> Insertar(string nombreProducto,string nombreProveedor,string nombreCategoria,int stockDisponible, decimal precioProducto, decimal porcentajeGanancia, decimal precioPublico);
         Task<bool> Actualizar(ProductoDTO models);
 
         Task<bool> Eliminar(int id);

@@ -95,6 +95,8 @@ public partial class BasePruebasContext : DbContext
             entity.Property(e => e.DiasVisita).HasColumnName("DiasVisita");
             entity.Property(e => e.TipoProducto).HasColumnName("TipoProducto");
             entity.Property(e => e.Estado).HasColumnName("Estado");
+            entity.Property(e => e.Telefono).HasColumnName("Telefono");
+            entity.Property(e => e.DatosAdicionales).HasColumnName("DatosAdicionales");
             // Otros mapeos de propiedades
         });
         modelBuilder.Entity<ProductoDTO>(entity =>
@@ -105,6 +107,7 @@ public partial class BasePruebasContext : DbContext
             entity.Property(e => e.ProveedorId).HasColumnName("Proveedor_id");
             entity.Property(e => e.CategoriaId).HasColumnName("Categoria_id");
             entity.Property(e => e.Nombre).HasColumnName("Nombre");
+            
 
             //// Configurar relación con Proveedor (FK)
             //entity.HasOne(p => p.Proveedor) // Relación uno a uno o uno a muchos

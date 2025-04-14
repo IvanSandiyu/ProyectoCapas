@@ -12,7 +12,9 @@ namespace DTOs.Proveedor
         public string NombreEmpresa { get; set; }
         public string DiasVisita { get; set; }
         public string TipoProducto { get; set; }
-        public bool Estado { get; set; }
+        public bool? Estado { get; set; }
+        public int? Telefono { get; set; }
+        public string DatosAdicionales { get; set; }
         //public string NombreProveedor { get; set; }
     }
 }
