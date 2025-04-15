@@ -21,6 +21,16 @@ namespace AplicationWeb.Controllers.Proveedor
             return View();
         }
 
+        public async Task<IActionResult> CrearProveedor()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreacionProveedor(string v)
+        {
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetProveedores()
         {
