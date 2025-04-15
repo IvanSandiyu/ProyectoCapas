@@ -17,7 +17,7 @@
                 mensajeDiv.textContent = data.message;
                 mensajeDiv.classList.remove("hidden");
                 mensajeDiv.classList.add(data.success ? "bg-green-500" : "bg-red-500", "animate-fade-in");
-
+                
                 if (data.success) {
                     form.reset();
                     setTimeout(() => location.reload(), 2000); // Recargar después de éxito

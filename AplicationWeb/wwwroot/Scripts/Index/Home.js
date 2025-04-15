@@ -2,6 +2,7 @@
     //Funcion para cargar los productos
     const botonCargar = document.getElementById("cargar-productos-btn");
 
+  
     const CargarProductos = async (productos) => {
         try {
 
@@ -14,7 +15,7 @@
 
             // Limpia el contenido existente
             tbody.innerHTML = "";
-
+            //console.log(productos);
 
             // Agrega los nuevos productos
             productos.slice(0, 10).forEach(producto => {
@@ -24,10 +25,30 @@
                     <td class="px-4 py-3">${producto.stockDisponible.cantidadActual}</td>
                     <td class="px-4 py-3">${producto.categoria.nombre}</td>
                     <td class="px-4 py-3 max-w-[12rem] truncate">${producto.nombreProveedor}</td>
-                    <td class="px-4 py-3">$1000</td>
+                    <td class="px-4 py-3">${producto.historialProductos.precioPublico}</td>
+                    <td class="px-4 py-3">
+                        <button type="button" id="btnEditar" data-id="${producto.idProducto}" class=" btnEditar text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Editar</button>
+                        <button type="button" id="btnEliminar" data-id="${producto.idProducto}" class=" btnEliminar text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-1 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
                     </tr>
+                    
+
         `;
+               
                 tbody.innerHTML += row;
+            });
+            tbody.addEventListener('click', (event) => {
+                if (event.target.classList.contains('btnEditar')) {
+                    const productoId = event.target.getAttribute('data-id');
+                    RedirigirProducto(productoId);
+                    console.log(`Editar producto con ID: ${productoId}`);
+
+
+                    // Aquí puedes llamar a una función para abrir un modal o navegar a otra página
+                } else if (event.target.classList.contains('btnEliminar')) {
+                    const productoId = event.target.getAttribute('data-id');
+                    console.log(`Eliminar producto con ID: ${productoId}`);
+                    // Aquí puedes agregar la lógica para eliminar el producto
+                }
             });
         } catch (error) {
             console.error("Error al cargar productos:", error);
@@ -77,14 +98,10 @@
     //};
 
     const searchInput = document.getElementById('simple-search');
-    //const tbody = document.getElementById('product-tbody');
 
     // Función para mostrar productos en la tabla
     async function renderProductos(palabra) {
         try {
-
-
-
             const response = await fetch('/Index/GetProductos'); // Ajusta la ruta según tu configuración
             const productos = await response.json();
             if (palabra.length > 0) {
@@ -92,9 +109,6 @@
                 CargarProductos(productosFiltrados);
             }
             else CargarProductos(productos);
-           
-
-
         } catch (error)
         {
             console.log("error");
@@ -125,6 +139,57 @@
             console.error("Error al cargar productos:", error);
         }
     }
+
+    async function RedirigirProducto(productoId) {
+        if (!productoId) {
+            console.error("No se encontró un ID de producto.");
+            return;
+        }
+        console.log("ID del producto seleccionado:", productoId);
+
+        try {
+            window.location.href = `/Producto/EditarProducto/${productoId}`;
+
+            // Llamar al endpoint con el ID del producto
+            //const response = await fetch(`/Producto/ObtenerProducto/${productoId}`, {
+            //    method: "GET",
+            //    headers: {
+            //        "Content-Type": "application/json",
+            //    },
+            //});
+
+            //if (!response.ok) {
+            //    throw new Error("Error al obtener el producto.");
+            //}
+
+            //const producto = await response.json();
+            //console.log("Datos del producto recibido:", producto);
+
+            // Guardar el producto en localStorage
+            //localStorage.setItem("productoEditar", JSON.stringify(producto));
+
+            // Redirigir a la página de edición con los datos en la URL
+            //const redirigir = await fetch(`/Producto/EditarProducto/${productoId}`, {
+            //    method: "GET",
+            //    headers: {
+            //        "Content-Type": "application/json",
+            //    },
+            //});
+            //if (!redirigir.ok) {
+            //    throw new Error("Error al obtener el producto.");
+            //}
+            //else {
+            //    const r = await redirigir.json();
+            //    console.log(r);
+            //}
+            //window.location.href = `/Producto/EditarProducto/${producto.idProducto}`;
+
+        } catch (error) {
+            console.error("Error en la peticion:", error);
+        }
+    };
+
+
     CargarTodosLosProductos();
 
 
