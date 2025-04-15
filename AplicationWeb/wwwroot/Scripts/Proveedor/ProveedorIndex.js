@@ -21,8 +21,7 @@
                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"> ${proveedor.nombreEmpresa} </th>
                     <td class="px-4 py-3">${proveedor.diasVisita}</td>
                     <td class="px-4 py-3">${proveedor.tipoProducto}</td>
-                    if(proveedor.estado == 1) <td class="px-4 py-3 max-w-[12rem] truncate">Activo</td>
-                    else <td class="px-4 py-3 max-w-[12rem] truncate">Inactivo</td>
+                    <td class="px-4 py-3">${proveedor.estado ? "Activo" : "Inactivo"}</td>
                     <td class="px-4 py-3">${proveedor.telefono}</td>
                     <td class="px-4 py-3">${proveedor.datosAdicionales}</td>
                     <td class="px-4 py-3">
@@ -55,8 +54,8 @@
     const CargarTodosLosProveedores = async () => {
 
         try {
-            const response = await fetch('/Proveedor/ObtenerTodos'); // Ajusta la ruta según tu configuración
-            //console.log(response);
+            const response = await fetch('/Proveedor/GetProveedores'); // Ajusta la ruta según tu configuración
+            console.log(response);
             if (!response.ok) throw new Error('Error al obtener proveedores');
             const proveedores = await response.json();
             CargarProveedores(proveedores);

@@ -139,6 +139,10 @@ try
        name: "default",
        pattern: "{controller=Producto}/{action=CrearProducto}/{id?}");
 
+    app.MapControllerRoute(
+        name: "default",
+       pattern: "{controller=Proveedore}/{action=ProveedorIndex}/{id?}");
+
 
 
     app.Run();

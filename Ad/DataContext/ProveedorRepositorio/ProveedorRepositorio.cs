@@ -54,12 +54,14 @@ namespace Ad.DataContext.ProveedorRepositorio
              IQueryable < ProveedorDTO > queryProductoSQL = _dbContext.Proveedor.Select(p => new ProveedorDTO
              {
                 IdProveedor = p.IdProveedor,
-                NombreEmpresa = p.NombreEmpresa,
-                DiasVisita = p.DiasVisita,
-                //TipoProducto = p.TipoProducto,
-                Estado = p.Estado,
-                Telefono = p.Telefono,
-                DatosAdicionales = p.DatosAdicionales,
+                NombreEmpresa = p.NombreEmpresa ?? "",
+                 Telefono = p.Telefono ?? 0,
+                 DiasVisita = string.IsNullOrWhiteSpace(p.DiasVisita) ? "No especifica":p.DiasVisita,
+                 DatosAdicionales = string.IsNullOrWhiteSpace(p.DatosAdicionales) ? "-" : p.DatosAdicionales,
+                 TipoProducto = string.IsNullOrWhiteSpace(p.TipoProducto) ? "-": p.TipoProducto ,
+                 Estado =  p.Estado,
+                
+                //DatosAdicionales = p.DatosAdicionales ?? "",
                 //StockDisponible = _dbContext.Stock.Where(s => s.ProductoId == p.IdProducto).FirstOrDefault(),
                 //NombreProveedor = _dbContext.Proveedor.FirstOrDefault(pr => pr.IdProveedor == p.ProveedorId).NombreEmpresa,
                 ////NombreCategoria = _dbContext.Categoria.FirstOrDefault(c => c.IdCategoria == p.Categoria.IdCategoria).Nombre,

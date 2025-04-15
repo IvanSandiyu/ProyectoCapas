@@ -11,3 +11,5 @@ obj/
 # Ignorar otros archivos que no quieras rastrear en Git
 *.log
 *.tmp
+/AplicationWeb/appsettings.json
+/AplicationWeb/wwwroot/css/app.min.css
