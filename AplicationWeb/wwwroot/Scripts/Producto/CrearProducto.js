@@ -25,6 +25,21 @@
             })
             .catch(error => console.error("Error:", error));
     });
+    // Función para calcular el precio al público
+    function calcularPrecioPublico() {
+        const precioProducto = parseFloat(document.getElementById("precioProducto").value) || 0;
+        const porcentajeGanancia = parseFloat(document.getElementById("porcentajeGanancia").value) || 0;
+
+        // Calcular el precio al público
+        const precioPublico = precioProducto * (1 + porcentajeGanancia / 100);
+
+        // Mostrar el resultado en el campo de precio público
+        document.getElementById("precioPublico").value = precioPublico.toFixed(2); // Redondea a 2 decimales
+    }
+
+
+    document.getElementById("precioProducto").addEventListener("input", calcularPrecioPublico);
+    document.getElementById("porcentajeGanancia").addEventListener("input", calcularPrecioPublico);
 
 
 
