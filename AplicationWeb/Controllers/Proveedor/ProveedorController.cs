@@ -1,7 +1,9 @@
-﻿using Ln.Service.Loggin;
+﻿using DTOs.Proveedor;
+using Ln.Service.Loggin;
 using Ln.Service.Proveedor;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AplicationWeb.Controllers.Proveedor
 {
@@ -21,14 +23,33 @@ namespace AplicationWeb.Controllers.Proveedor
             return View();
         }
 
-        public async Task<IActionResult> CrearProveedor()
+        public  IActionResult CrearProveedor()
         {
             return View();
         }
 
-        public async Task<IActionResult> CreacionProveedor(string v)
+        public async Task<IActionResult> CreacionProveedor(string nombreEmpresa,string diasVisita, string tipoP, long tel, string datosAd)
         {
-            return View();
+            if (nombreEmpresa.IsNullOrEmpty())
+            {
+                return Json(new { success = false, message = "Ocurrió un error al crear el proveedor." });
+            }
+
+            ProveedorDTO P = new ProveedorDTO
+            {
+                NombreEmpresa = nombreEmpresa,
+                DiasVisita = diasVisita,
+                TipoProducto = tipoP,
+                Telefono = tel,
+                DatosAdicionales = datosAd
+            };
+            bool respuesta = await _proveedorService.Insertar(P);
+
+            if (respuesta)
+            {
+                return Json(new { success = true, message = "El proveedor se creó correctamente." });
+            }
+            return Json(new { success = false, message = "Ocurrió un error al crear el proveedor." });
         }
 
         [HttpGet]

@@ -35,13 +35,14 @@
             tbody.addEventListener('click', (event) => {
                 if (event.target.classList.contains('btnEditar')) {
                     const proveedorId = event.target.getAttribute('data-id');
-                    //RedirigirProducto(proveedorId);
+                    RedirigirProveedor(proveedorId);
                     console.log(`Editar proveeedor con ID: ${proveedorId}`);
 
 
                     // Aquí puedes llamar a una función para abrir un modal o navegar a otra página
                 } else if (event.target.classList.contains('btnEliminar')) {
                     const proveedorId = event.target.getAttribute('data-id');
+                    RedirigirProveedor(proveedorId);
                     console.log(`Eliminar proveeedor con ID: ${proveedorId}`);
                     // Aquí puedes agregar la lógica para eliminar el producto
                 }
@@ -64,6 +65,49 @@
             console.error("Error al cargar proveedores:", error);
         }
     }
+    const searchInput = document.getElementById('simple-search');
+
+    // Función para mostrar proveedores en la tabla
+    async function renderProveedores(palabra) {
+        try {
+            const response = await fetch('/Proveedor/GetProveedores'); // Ajusta la ruta según tu configuración
+            const proveedores = await response.json();
+            if (palabra.length > 0) {
+                const proveedoresFiltrados = proveedores.filter((proveedor) => proveedor.nombreEmpresa.toLowerCase().startsWith(palabra));
+                CargarProveedores(proveedoresFiltrados);
+            }
+            else CargarProveedores(proveedores);
+        } catch (error) {
+            console.log("error");
+        }
+
+    }
+
+    // Escuchar evento de entrada en el campo de búsqueda
+    searchInput.addEventListener('input', async () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        if (searchTerm.length > 0) {
+            renderProveedores(searchTerm);
+        } else {
+            renderProveedores(0);
+        }
+    });
+
+    async function RedirigirProveedor(proveedorId) {
+        if (!proveedorId) {
+            console.error("No se encontró un ID de producto.");
+            return;
+        }
+        console.log("ID del proveedor seleccionado:", proveedorId);
+
+        try {
+            window.location.href = `/Proveedor/EditarProveedor/${proveedorId}`
+
+        } catch (error) {
+            console.error("Error en la peticion:", error);
+        }
+    }
+
 
     CargarTodosLosProveedores();
 
