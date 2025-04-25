@@ -27,7 +27,14 @@ namespace AplicationWeb.Controllers.Proveedor
         {
             return View();
         }
-
+        public IActionResult EditarProveedor(int id)
+        {
+            // Se utiliza 'await' para obtener el resultado de la tarea y se corrige el tipo de retorno.
+            ProveedorDTO p= _proveedorService.Obtener(id).Result;
+            if (p != null)
+                return View(p); // Se pasa el proveedor al modelo de la vista.
+            else return NotFound(); // Manejo de error si el producto no se encuentra.
+        }
         public async Task<IActionResult> CreacionProveedor(string nombreEmpresa,string diasVisita, string tipoP, long tel, string datosAd)
         {
             if (nombreEmpresa.IsNullOrEmpty())
