@@ -149,6 +149,7 @@
 
         try {
             window.location.href = `/Producto/EditarProducto/${productoId}`;
+            
 
             // Llamar al endpoint con el ID del producto
             //const response = await fetch(`/Producto/ObtenerProducto/${productoId}`, {

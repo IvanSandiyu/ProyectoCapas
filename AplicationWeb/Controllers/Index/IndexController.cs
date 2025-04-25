@@ -61,6 +61,7 @@ namespace AplicationWeb.Controllers.Index
             //Falta hacer que al hacerle click cambie de pestaña
             return Redirect("/Producto/CrearProducto");
         }
+       
 
         //[HttpGet]
         //[Route("api/busqueda")]

@@ -141,7 +141,7 @@ try
 
     app.MapControllerRoute(
         name: "default",
-       pattern: "{controller=Proveedore}/{action=ProveedorIndex}/{id?}");
+       pattern: "{controller=Proveedor}/{action=ProveedorIndex}/{id?}");
 
 
 
